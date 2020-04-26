@@ -3,12 +3,21 @@ import React from 'react';
 import styles from './BurgerIngredient.module.css';
 
 export enum BurgerIngredientTypes {
-  BreadBottom,
-  BreadTop,
-  Meat,
-  Cheese,
-  Bacon,
+  BunBottom,
+  BunTop,
   Lettuce,
+  Bacon,
+  Cheese,
+  Meat,
+}
+
+export enum BurgerIngredientTypesPrices {
+  BunBottom = 0,
+  BunTop = 0,
+  Lettuce = 0.3,
+  Bacon = 0.7,
+  Cheese = 0.5,
+  Meat = 1.5,
 }
 
 export type BurgerIngredientProp = {
@@ -16,25 +25,24 @@ export type BurgerIngredientProp = {
 };
 
 const BurgerIngredient = (props: BurgerIngredientProp) => {
-  let ingredient: JSX.Element | null = null;
+  let ingredient: JSX.Element;
+  const stylesName = styles[BurgerIngredientTypes[props.type]];
 
   switch (props.type) {
-    case BurgerIngredientTypes.BreadTop:
+    case BurgerIngredientTypes.BunTop:
       ingredient = (
-        <div className={styles.BreadTop}>
+        <div className={stylesName}>
           <div className={styles.Seeds1}></div>
           <div className={styles.Seeds2}></div>
         </div>
       );
       break;
 
-    case BurgerIngredientTypes.BreadBottom:
+    case BurgerIngredientTypes.BunBottom:
     case BurgerIngredientTypes.Meat:
     case BurgerIngredientTypes.Cheese:
     case BurgerIngredientTypes.Bacon:
     case BurgerIngredientTypes.Lettuce:
-      const typeName = BurgerIngredientTypes[props.type];
-      const stylesName = styles[typeName];
       ingredient = <div className={stylesName}></div>;
       break;
   }
