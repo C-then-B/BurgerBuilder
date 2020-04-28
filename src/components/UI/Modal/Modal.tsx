@@ -9,6 +9,13 @@ export type ModalProp = {
   modalClicked: () => void;
 };
 
+const shouldComponentUpdate = (
+  prevProps: Readonly<ModalProp>,
+  nextProps: Readonly<ModalProp>
+) => {
+  return !(prevProps.show !== nextProps.show);
+};
+
 const Modal = (props: ModalProp) => {
   return (
     <>
@@ -26,4 +33,4 @@ const Modal = (props: ModalProp) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal, shouldComponentUpdate);
